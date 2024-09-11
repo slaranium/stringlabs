@@ -1,0 +1,119 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+
+const meta = {
+	description: "I'm a starter theme for Astro.build",
+	title: "About",
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="space-y-6">
+		<h1 class="title">About</h1>
+		<p style="text-align: justify;">
+			Hi, I'm StringLabs, independent validator from Indonesia with over 1.5 years of experience
+			running nodes.
+		</p>
+		<p style="text-align: justify;">
+			Your reliable partner in ensuring the security and efficiency of blockchain networks. In
+			Stringlabs, we specialize in providing robust and trustworthy node validation services that
+			are critical for the stability and integrity of decentralized systems.
+		</p>
+
+		<p style="text-align: justify;">
+			We stand out by providing public infrastructure such as public node endpoints and running IBC
+			relays across multiple chains, while prioritizing responsible governance and enthusiastic
+			community engagement. Our dedication to the projects we validate includes creating
+			documentation and services for fellow validators, strengthening infrastructure security
+			through manual as well as automated setting
+		</p>
+	</div>
+
+	<!-- Section Kontak -->
+	<div class="mt-10 grid grid-cols-1 items-center gap-4 rounded-lg bg-gray-100 p-6 md:grid-cols-2">
+		<div class="text-gray-900">
+			<h2 class="text-xl font-bold">Want to get in touch?</h2>
+			<p class="mt-2">
+				Find me across various social media platforms. Feel free to reach out through any of these
+				channels. Let's chat and bring your ideas to life!
+			</p>
+		</div>
+		<div class="mt-4 flex justify-center md:mt-0 md:justify-end">
+			<a
+				href="https://t.me/slarahimura"
+				class="button-hover-effect flex items-center rounded-full bg-gray-200 px-4 py-2 font-semibold text-gray-900 transition duration-300 ease-in-out"
+			>
+				Send a message
+				<!-- SVG Ikon Telegram -->
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="16"
+					height="16"
+					fill="currentColor"
+					class="bi bi-send-fill ml-2"
+					viewBox="0 0 16 16"
+				>
+					<path
+						d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"
+					></path>
+				</svg>
+			</a>
+		</div>
+	</div>
+</PageLayout>
+
+<style>
+	/* Mengubah warna background grid box di section kontak */
+	.grid {
+		background-color: rgb(41, 188, 137); /* Warna background hijau untuk grid box */
+		color: white; /* Warna teks default menjadi putih untuk kontras */
+		border-radius: 12px; /* Membuat tepi grid box menjadi melengkung */
+		padding: 1.5rem; /* Menambahkan padding untuk ruang dalam grid box */
+	}
+
+	/* Mode dark untuk grid box di section kontak */
+	html[data-theme="dark"] .grid {
+		background-color: rgb(34, 162, 121); /* Warna hijau yang lebih gelap untuk mode dark */
+		color: white; /* Warna teks tetap putih di mode dark */
+	}
+
+	/* Aturan default untuk tombol */
+	.button-hover-effect {
+		background-color: white; /* Warna background default putih */
+		color: rgb(41, 188, 137); /* Warna teks hijau */
+		display: flex;
+		align-items: center;
+		transition:
+			background-color 0.3s ease,
+			color 0.3s ease;
+	}
+
+	/* Efek hover pada tombol untuk mode light */
+	.button-hover-effect:hover {
+		background-color: rgb(229, 229, 229); /* Warna background saat hover menjadi abu-abu muda */
+		color: rgb(41, 188, 137); /* Warna teks tetap hijau saat hover */
+	}
+
+	/* Mode dark untuk tombol */
+	html[data-theme="dark"] .button-hover-effect {
+		background-color: white; /* Warna background default tetap putih di mode dark */
+		color: rgb(41, 188, 137); /* Warna teks tetap hijau di mode dark */
+	}
+
+	/* Efek hover pada tombol di mode dark */
+	html[data-theme="dark"] .button-hover-effect:hover {
+		background-color: rgb(229, 229, 229); /* Warna hover tombol di mode dark tetap abu-abu muda */
+		color: rgb(41, 188, 137); /* Warna teks saat hover tetap hijau di mode dark */
+	}
+
+	/* Warna default untuk ikon di dalam tombol */
+	.button-hover-effect svg {
+		fill: rgb(41, 188, 137); /* Warna ikon default hijau */
+		transition: fill 0.3s ease;
+	}
+
+	/* Warna ikon saat hover */
+	.button-hover-effect:hover svg {
+		fill: rgb(41, 188, 137); /* Warna ikon tetap hijau saat hover */
+	}
+</style>

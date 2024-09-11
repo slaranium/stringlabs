@@ -1,0 +1,329 @@
+---
+import PageLayout from "@/layouts/Base.astro";
+import { networks } from "@/data/networks.js";
+
+// Definisikan tipe untuk parameter network
+interface NetworkType {
+  name: string;
+  type: string;
+  icon: string;
+  monitUrl: string;
+  stakeUrl: string;
+  stakedToken?: string; // Properti opsional
+}
+
+// Deklarasi array services
+const services = [
+  {
+    title: "Full Compliance",
+    description:
+      "We strictly observe blockchain governance protocols, actively involved in chain governance, updates, and upgrades to ensure network stability and foster continuous innovation.",
+    icon: "/padlock.png",
+  },
+  {
+    title: "Monitoring Tool",
+    description:
+      "A powerful and easy-to-use monitoring tool for server hardware and validator nodes with alert",
+    icon: "/coding.png",
+  },
+  {
+    title: "Docs Guide",
+    description:
+      "We offer detailed setup documentation and guides to our community, enabling users to navigate and make full use of our platform with confidence.",
+    icon: "/agenda.png",
+  },
+  {
+    title: "Interchain Explorer",
+    description:
+      "Our swift and dependable Interchain Explorer enables smooth navigation and interaction across blockchain networks, improving accessibility and the overall user experience.",
+    icon: "/supply-chain.png",
+  },
+];
+---
+
+<PageLayout meta={{ title: "Home" }}>
+  <section>
+    <h1 class="title mb-6">Hey there, I'm StringLabs</h1>
+    <p class="mb-4">
+      is an Independent and Reliable validator. Dedicated to running reliable and efficient
+      blockchain nodes, contributing to the future of blockchain technology.
+    </p>
+  </section>
+
+  <!-- Section untuk tampilan Services -->
+  <section class="services-section mt-16">
+    <h2 class="title mb-4 text-xl">Services</h2>
+    <p class="mb-4">I give you the best in all the services below</p>
+    <div class="services-grid">
+      {
+        services.map((service) => (
+          <div class="service-card">
+            <img src={service.icon} alt={service.title} class="service-icon" />
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Section untuk Networks -->
+  <section class="networks-section mt-16">
+    <h2 class="title mb-4 text-xl">Networks</h2>
+    <p class="mb-4">
+      Check out some of the networks I recently supported. Use the buttons to toggle the different
+      categories.
+    </p>
+
+    <!-- Buttons for filtering -->
+    <div class="button-group mb-6">
+      <button class="filter-button active" data-filter="all">All</button>
+      <button class="filter-button" data-filter="mainnet">Mainnet</button>
+      <button class="filter-button" data-filter="testnet">Testnet</button>
+      <button class="filter-button" data-filter="archive">Archive</button>
+    </div>
+
+    <!-- Network grid -->
+    <div id="networks-grid" class="networks-grid">
+      {
+        networks.map((network: NetworkType) => (
+          <div class={`network-card ${network.type}`}>
+            <img src={network.icon} alt={network.name} class="network-icon" />
+            <h3>{network.name}</h3>
+            <p class="hidden">Staked Token: {network.stakedToken || "N/A"}</p>
+            <div class="button-group">
+              <a href={network.monitUrl} target="_blank" rel="noopener noreferrer" class="monit-button">Install</a>
+              <a href={network.stakeUrl} target="_blank" rel="noopener noreferrer" class="stake-button">Stake</a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const filterButtons = document.querySelectorAll(".filter-button");
+    const networkCards = document.querySelectorAll(".network-card") as NodeListOf<HTMLElement>;
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.getAttribute("data-filter") || "all";
+
+        // Update active button
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        // Filter network cards
+        networkCards.forEach((card) => {
+          if (filter === "all" || card.classList.contains(filter)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+	/* Aturan default untuk tombol dan section services */
+	.services-section {
+		text-align: center;
+		padding: 2rem;
+		margin-bottom: 4rem; /* Menambahkan jarak bawah antar section */
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		justify-content: center;
+		grid-auto-rows: 1fr;
+	}
+
+	.service-card {
+		background-color: rgb(41, 188, 137);
+		border-radius: 12px;
+		padding: 1.5rem;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		text-align: left;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+		transition:
+			transform 0.3s ease,
+			box-shadow 0.3s ease;
+	}
+
+	.service-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	}
+
+	.service-icon {
+		width: 40px;
+		height: 40px;
+		margin-bottom: 1rem;
+	}
+
+	h3 {
+		font-size: inherit;
+		margin: 0.5rem 0;
+	}
+
+	p {
+		font-size: 1rem;
+		color: #e5e7eb;
+		flex-grow: 1;
+	}
+
+	.networks-section {
+		text-align: center;
+		padding: 2rem;
+		margin-top: -50px;
+	}
+
+	.button-group {
+		display: flex;
+		justify-content: left;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.filter-button {
+		padding: 0.5rem 1rem;
+		border: none;
+		border-radius: 8px;
+		background-color: #f0f0f0;
+		cursor: pointer;
+		font-weight: bold;
+	}
+
+	.filter-button.active {
+		background-color: rgb(203, 42, 66);
+		color: white;
+	}
+
+	.networks-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1.5rem;
+		justify-content: center;
+		grid-auto-rows: 1fr; /* Menjaga tinggi setiap grid box tetap */
+	}
+
+	@media (min-width: 600px) {
+		.networks-grid {
+			grid-template-columns: repeat(2, minmax(250px, 1fr)); /* Memastikan ada dua kolom minimal */
+		}
+	}
+
+	.network-card {
+		background-color: #f0f0f0;
+		border-radius: 12px;
+		padding: 2rem; /* Padding yang sama di semua sisi */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between; /* Pastikan ada jarak yang sama antara konten */
+		align-items: center;
+		text-align: center; /* Pusatkan teks secara horizontal */
+		min-height: 300px; /* Tinggi minimum */
+	}
+
+	.network-card img {
+		margin: auto; /* Membuat margin otomatis agar gambar terpusat secara vertikal */
+		margin-top: 1rem; /* Jarak atas gambar */
+		margin-bottom: 1rem; /* Jarak bawah gambar */
+		max-width: 100px; /* Sesuaikan ukuran maksimum gambar */
+		height: auto; /* Mempertahankan aspek rasio gambar */
+	}
+
+	.network-card h3 {
+		margin: 1rem 0; /* Jarak atas dan bawah yang sama untuk judul */
+	}
+
+	.network-card p {
+		margin: 1rem 0; /* Jarak atas dan bawah yang sama untuk teks */
+	}
+	.network-icon {
+		width: 60px;
+		height: 60px;
+		margin-bottom: 1rem;
+		justify-content: center;
+	}
+
+	.button-group {
+		display: flex;
+		justify-content: center; /* Membuat tombol-tombol tersebar secara merata */
+		width: 100%; /* Pastikan tombol-tombol mengambil lebar penuh dari kontainer */
+		gap: 1rem; /* Jarak antar tombol */
+	}
+
+	.button-group button {
+		flex: 1; /* Membuat tombol-tombol menyesuaikan lebar dengan kontainer */
+		text-align: center; /* Pusatkan teks dalam tombol */
+	}
+
+	.monit-button,
+	.stake-button {
+		padding: 0.5rem 1rem;
+		border: none;
+		border-radius: 8px;
+		cursor: pointer;
+		font-weight: bold;
+		display: flex;
+		flex:1;
+		align-items: center;
+		justify-content: center;
+
+	}
+
+	.monit-button {
+		background-color: #e0e0e0;
+		color: black;
+	}
+
+	.stake-button {
+		background-color: rgb(203, 42, 66);
+		color: white;
+	}
+
+	.stake-button:hover {
+		background-color: rgb(173, 35, 56);
+	}
+
+	.network-card {
+		@apply bg-bgColor text-textColor; /* Default colors */
+	}
+
+	/* Mode dark */
+	html[data-theme="dark"] .network-card {
+		@apply bg-darkBg text-darkText; /* Warna saat mode dark aktif */
+	}
+
+	/* Default button styling */
+	.filter-button {
+		@apply bg-bgColor text-textColor; /* Warna default */
+	}
+
+	/* Active button styling */
+	.filter-button.active {
+		@apply bg-accent text-white; /* Warna saat tombol aktif pada mode normal */
+	}
+
+	/* Mode dark untuk grid box */
+	html[data-theme="dark"] .network-card {
+		background-color: #1a1a1a; /* Warna gelap untuk mode dark */
+		color: white; /* Warna teks untuk mode dark */
+	}
+
+	.hidden {
+    display: none;
+	}
+
+</style>

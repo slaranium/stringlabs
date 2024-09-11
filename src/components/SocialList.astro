@@ -1,0 +1,49 @@
+---
+import { FaGithub, FaTwitter, FaTelegram } from "react-icons/fa"; // Impor ikon tambahan
+
+const socialLinks = [
+	{
+		friendlyName: "Github",
+		link: "https://github.com/slaranium",
+		icon: FaGithub,
+	},
+	{
+		friendlyName: "Twitter",
+		link: "https://twitter.com/slaranium", // Ganti dengan link Twitter Anda
+		icon: FaTwitter,
+	},
+	{
+		friendlyName: "Telegram",
+		link: "https://t.me/slarahimura", // Ganti dengan link Telegram Anda
+		icon: FaTelegram,
+	},
+];
+---
+
+<style>
+	.hover-green:hover {
+		color: rgb(41, 188, 137); /* Warna hijau khusus */
+	}
+</style>
+
+<div class="flex flex-wrap items-end gap-x-2">
+	<ul class="flex flex-1 items-center gap-x-2 sm:flex-initial">
+		{
+			socialLinks.map(({ friendlyName, link, icon: Icon }) => (
+				<li class="flex">
+					<a
+						class="hover-green inline-block p-1 sm:hover:text-link"
+						href={link}
+						rel="noreferrer"
+						target="_blank"
+					>
+						<span class="h-12 w-12">
+							<Icon aria-hidden="true" size={24} />
+						</span>
+						<span class="sr-only">{friendlyName}</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</div>

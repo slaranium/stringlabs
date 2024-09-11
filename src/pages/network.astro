@@ -1,0 +1,239 @@
+---
+import PageLayout from "@/layouts/Base.astro"; // Sama seperti di index.astro
+import { networks } from "@/data/networks"; // Mengimpor data networks dari file networks.js
+
+// Mengimpor tipe dari types.ts
+import type { Network } from '@/types'; 
+---
+
+<PageLayout meta={{ title: "Networks" }}>
+	<section class="networks-section mt-16">
+		<h1 class="title mb-4 text-xl" style="text-align: left;">Networks</h1>
+		<p class="paragraph-margin mb-4" style="text-align: left;">
+			Here are some of the networks I recently supported. Explore the networks below.
+		</p>
+
+		<!-- Buttons for filtering -->
+		<div class="button-group mb-6">
+			<button class="filter-button active" data-filter="all">All</button>
+			<button class="filter-button" data-filter="mainnet">Mainnet</button>
+			<button class="filter-button" data-filter="testnet">Testnet</button>
+			<button class="filter-button" data-filter="archive">Archive</button>
+		</div>
+
+		<!-- Network grid -->
+		<div id="networks-grid" class="networks-grid">
+			{
+				// Beri tipe eksplisit pada parameter 'network'
+				networks.map((network: Network) => (
+					<div class={`network-card ${network.type}`}>
+						<img src={network.icon} alt={network.name} class="network-icon" />
+						<h3>{network.name}</h3>
+						<p class="hidden">Staked Token: {network.stakedToken || "N/A"}</p>
+						<div class="button-group">
+							<a
+								href={network.monitUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="monit-button"
+							>
+								Install
+							</a>
+							<a
+								href={network.stakeUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="stake-button"
+							>
+								Stake
+							</a>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const filterButtons = document.querySelectorAll(".filter-button");
+			const networkCards = document.querySelectorAll(".network-card") as NodeListOf<HTMLElement>; 
+
+			filterButtons.forEach((button) => {
+				button.addEventListener("click", () => {
+					const filter = button.getAttribute("data-filter") || "all";
+
+					// Update active button
+					filterButtons.forEach((btn) => btn.classList.remove("active"));
+					button.classList.add("active");
+
+					// Filter network cards
+					networkCards.forEach((card) => {
+						if (filter === "all" || card.classList.contains(filter)) {
+							card.style.display = "block"; 
+						} else {
+							card.style.display = "none";
+						}
+					});
+				});
+			});
+		});
+	</script>
+</PageLayout>
+
+<style>
+	.networks-section {
+		max-width: 800px; /* Sesuaikan lebar maksimal sesuai dengan kebutuhan Anda */
+		margin: 0 auto; /* Tengah-kan section secara horizontal */
+		padding: 0 1rem; /* Tambahkan padding kiri dan kanan agar tidak terlalu menempel pada tepi */
+		text-align: justify; /* Justifikasi teks */
+		text-align: left; /* Teks rata kiri sesuai permintaan */
+		margin-bottom: 2rem;
+	}
+
+	/* Aturan untuk memberi jarak pada paragraf */
+	.paragraph-margin {
+		margin-bottom: 2rem; /* Mengatur jarak bawah untuk paragraf */
+	}
+
+	.button-group {
+		display: flex;
+		justify-content: left;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.filter-button {
+		padding: 0.5rem 1rem;
+		border: none;
+		border-radius: 8px;
+		background-color: #f0f0f0;
+		cursor: pointer;
+		font-weight: bold;
+	}
+
+	.filter-button.active {
+		background-color: rgb(203, 42, 66);
+		color: white;
+	}
+
+	.networks-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1.5rem;
+		justify-content: center;
+		grid-auto-rows: 1fr; /* Menjaga tinggi setiap grid box tetap */
+	}
+
+	@media (min-width: 600px) {
+		.networks-grid {
+			grid-template-columns: repeat(2, minmax(250px, 1fr)); /* Memastikan ada dua kolom minimal */
+		}
+	}
+
+	.network-card {
+		background-color: #f0f0f0;
+		border-radius: 12px;
+		padding: 2rem; /* Padding yang sama di semua sisi */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between; /* Pastikan ada jarak yang sama antara konten */
+		align-items: center;
+		text-align: center; /* Pusatkan teks secara horizontal */
+		min-height: 300px; /* Tinggi minimum */
+	}
+
+	.network-card img {
+		margin: auto; /* Membuat margin otomatis agar gambar terpusat secara vertikal */
+		margin-top: 1rem; /* Jarak atas gambar */
+		margin-bottom: 1rem; /* Jarak bawah gambar */
+		max-width: 100px; /* Sesuaikan ukuran maksimum gambar */
+		height: auto; /* Mempertahankan aspek rasio gambar */
+	}
+
+	.network-card h3 {
+		margin: 1rem 0; /* Jarak atas dan bawah yang sama untuk judul */
+	}
+
+	.network-card p {
+		margin: 1rem 0; /* Jarak atas dan bawah yang sama untuk teks */
+	}
+	.network-icon {
+		width: 60px;
+		height: 60px;
+		margin-bottom: 1rem;
+		justify-content: center;
+	}
+
+	.button-group {
+		display: flex;
+		justify-content: space-between; /* Membuat tombol-tombol tersebar secara merata */
+		width: 100%; /* Pastikan tombol-tombol mengambil lebar penuh dari kontainer */
+		gap: 1rem; /* Jarak antar tombol */
+	}
+
+	.button-group button {
+		flex: 1; /* Membuat tombol-tombol menyesuaikan lebar dengan kontainer */
+		text-align: center; /* Pusatkan teks dalam tombol */
+	}
+
+	.monit-button,
+	.stake-button {
+		padding: 0.5rem 1rem;
+		border: none;
+		border-radius: 8px;
+		cursor: pointer;
+		font-weight: bold;
+		display: flex;
+		flex: 1;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.monit-button {
+		background-color: #e0e0e0;
+		color: black;
+	}
+
+	.stake-button {
+		background-color: rgb(203, 42, 66);
+		color: white;
+	}
+
+	.stake-button:hover {
+		background-color: rgb(173, 35, 56);
+	}
+
+	.network-card {
+		@apply bg-bgColor text-textColor; /* Default colors */
+	}
+
+	/* Mode dark */
+	html[data-theme="dark"] .network-card {
+		@apply bg-darkBg text-darkText; /* Warna saat mode dark aktif */
+	}
+
+	/* Default button styling */
+	.filter-button {
+		@apply bg-bgColor text-textColor; /* Warna default */
+	}
+
+	/* Active button styling */
+	.filter-button.active {
+		@apply bg-accent text-white; /* Warna saat tombol aktif pada mode normal */
+	}
+
+	/* Mode dark */
+	html[data-theme="dark"] .filter-button {
+		@apply bg-darkButtonBg text-darkButtonText; /* Warna tombol untuk mode dark */
+	}
+
+	html[data-theme="dark"] .filter-button.active {
+		@apply bg-darkButtonBgActive text-darkButtonText; /* Warna tombol aktif untuk mode dark */
+	}
+
+	.hidden {
+		display: none;
+	}
+</style>

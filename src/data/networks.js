@@ -1,5 +1,13 @@
 export const networks = [
 	{
+		name: "Story Protocol",
+		stakedToken: "1136 $STR",
+		icon: "/story.jpg", // Ganti dengan path ikon yang sesuai
+		type: "testnet",
+		monitUrl: "https://orchestralabs.org/documentation/developers/validators", // URL untuk tombol Monit
+		stakeUrl: "https://testnet.story.explorers.guru/validator/storyvaloper1fe97lhprjqwt7dq6qgs582zvqarm2afakvxkmc", // URL untuk tombol Stake
+	},
+	{
 		name: "Symphony",
 		stakedToken: "35000 $CQT",
 		icon: "/symphoni.jpg", // Ganti dengan path ikon yang sesuai

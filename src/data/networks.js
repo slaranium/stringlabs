@@ -4,8 +4,8 @@ export const networks = [
 		stakedToken: "55000 $PRYSM",
 		icon: "/prysm.png", // Ganti dengan path ikon yang sesuai
 		type: "testnet",
-		monitUrl: "https://orchestralabs.org/documentation/developers/validators", // URL untuk tombol Monit
-		stakeUrl: "https://testnet.story.explorers.guru/validator/storyvaloper1fe97lhprjqwt7dq6qgs582zvqarm2afakvxkmc", // URL untuk tombol Stake
+		monitUrl: "https://github.com/vinjan23/Testnet.Guide/tree/main/Prysm", // URL untuk tombol Monit
+		stakeUrl: "https://explorer.stringlabs.xyz/prysm-testnet/staking/prysmvaloper1l5shc06wnqw2ap3wq7rlg6gtzxgwznmzvphpg6", // URL untuk tombol Stake
 	},
 	{
 		name: "Story Protocol",

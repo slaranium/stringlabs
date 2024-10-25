@@ -40,7 +40,7 @@ export const menuLinks: { path: string; title: string }[] = [
 		title: "Network",  // Judul menu Network
 	},
 	{
-		path: "https://docs.stringlabs.xyz",
+		path: "https://explorer.stringlabs.xyz",
 		title: "Service",
 	},
 	{

@@ -40,6 +40,15 @@ export const networks = [
     		stakeUrl: "", // URL untuk tombol Stake
 	},
 	{
+		name: "Covalent EWM",
+		stakedToken: "1000 $COVALENT",
+		icon: "/covalent.png", // Ganti dengan path ikon yang sesuai
+		type: "testnet",
+		monitUrl: "https://www.covalenthq.com/docs/nodes/ewm-light-client/lc-setup", // URL untuk tombol Monit
+		stakeUrl: "", // URL untuk tombol Stake
+	},
+
+	{
 		name: "Viper Network",
 		stakedToken: "10000 $DYM",
 		icon: "/viper.jpg", // Ganti dengan path ikon yang sesuai

@@ -8,6 +8,14 @@ export const networks = [
 		stakeUrl: "https://dashtec.xyz/validators/0x7f96e39e5320e3c1973485f8bcc741cb162a9de3", // URL untuk tombol Stake
 	},
 	{
+		name: "Drosera Network",
+		stakedToken: "55000 $PRYSM",
+		icon: "/drosera.jpg", // Ganti dengan path ikon yang sesuai
+		type: "testnet",
+		monitUrl: "https://dev.drosera.io", // URL untuk tombol Monit
+		stakeUrl: "#", // URL untuk tombol Stake
+	},
+	{
 		name: "Prysm Network",
 		stakedToken: "55000 $PRYSM",
 		icon: "/prysm.png", // Ganti dengan path ikon yang sesuai

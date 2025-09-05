@@ -13,7 +13,7 @@ export const networks = [
 		icon: "/drosera.jpg", // Ganti dengan path ikon yang sesuai
 		type: "testnet",
 		monitUrl: "https://dev.drosera.io", // URL untuk tombol Monit
-		stakeUrl: "#", // URL untuk tombol Stake
+		stakeUrl: "", // URL untuk tombol Stake
 	},
 	{
 		name: "Prysm Network",
